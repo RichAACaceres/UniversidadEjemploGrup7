@@ -8,26 +8,26 @@ import java.time.Month;
 
 public class Principal {
      public static void main(String[] args) {
-        Alumno carlos=new Alumno("Suarez","Martin",LocalDate.of(2024,5,11),true,123123);
+        Alumno carlos=new Alumno("Correa","Carlos",LocalDate.of(2024,5,11),true,123321);
         AlumnoData alu=new AlumnoData();
         
         //Guardar Alumno
-        alu.guardarAlumno(carlos);
+       // alu.guardarAlumno(carlos);
        
 //        buscar Alumno por id
-//        alu.buscarAlumno(1);
-//        
+          //System.out.println(alu.buscarAlumno(9));
+    
 //        Buscar alumno por dni
-//        alu.buscarAlumnoPorDni(123123);
+         //System.out.println(alu.buscarAlumnoPorDni(123123)); 
 //         
 //        modificar alumno
-//        alu.modificarAlumno(carlos);
+       //alu.modificarAlumno(carlos);
 //        
 //        Eliminar alumno por id
-//        alu.eliminarAlumno(1);
+      //alu.eliminarAlumno(9);
 //        
 //        Listar alumnos
-//         System.out.println(alu.listarAlumno());
+        //System.out.println(alu.listarAlumno());
         
     }
 }

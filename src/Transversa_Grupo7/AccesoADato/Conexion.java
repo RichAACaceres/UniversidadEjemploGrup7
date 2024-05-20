@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class Conexion {
-    private static final String URL="";
-    private static final String DB="";
-    private static final String USUARIO="";
+    private static final String URL="jdbc:mariadb://localhost:3308/ulp";
+  
+    private static final String USUARIO="root";
     private static final String PASSWORD="";
 
     private static Connection connection;
@@ -31,9 +31,9 @@ public class Conexion {
             
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
-                
-                connection= DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC"  
-                                                        + "&user=" + USUARIO + "&password=" + PASSWORD);
+                System.out.println("Driver cargado");
+                connection= DriverManager.getConnection(URL,USUARIO,PASSWORD);
+                System.out.println("Conectado a la base de datos");
                 
             } catch (ClassNotFoundException ex) {
                  JOptionPane.showMessageDialog(null,"Error a cargar el driver"+ex.getMessage());

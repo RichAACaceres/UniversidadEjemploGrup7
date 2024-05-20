@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class AlumnoData {
     
-    private Connection con;
+    private Connection con=Conexion.getConexion();
 
     public AlumnoData() {
     }
@@ -47,7 +47,7 @@ public class AlumnoData {
     public Alumno buscarAlumno(int id){
         Alumno alumno=new Alumno();
         
-        String sqlAlum="SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE idAlumno = ? AND estado = 1";
+        String sqlAlum="SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE idAlumno = ? AND estado = 1";
         
         try {
             PreparedStatement ps=con.prepareStatement(sqlAlum);
@@ -61,12 +61,12 @@ public class AlumnoData {
                 alumno.setApellido(resul.getString("apellido"));
                 alumno.setNombre(resul.getString("nombre"));
                 alumno.setFechaNacimiento(resul.getDate("fechaNacimiento").toLocalDate());
-                
+                alumno.setDni(resul.getInt("dni"));
                 alumno.setActivo(true);
                 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al buscar por Alumno");
+            JOptionPane.showMessageDialog(null, "Error al buscar alumno por id");
         }
         
         return alumno;
@@ -76,13 +76,11 @@ public class AlumnoData {
     public Alumno buscarAlumnoPorDni(int dni){
         Alumno alumno=new Alumno();
         
-        String sql="SELECT `idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado` FROM `alumno` WHERE dni = ? AND estado = 1";
+        String sql="SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE dni = ? AND estado = 1";
                 
-            
-            
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(2, dni);
+            ps.setInt(1, dni);
             
             ResultSet resul=ps.executeQuery();
             
@@ -95,7 +93,7 @@ public class AlumnoData {
                 alumno.setActivo(true);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al buscar por DNI");
+            JOptionPane.showMessageDialog(null, "Error al buscar alumno por DNI");
         }
         
         return alumno;
@@ -104,17 +102,18 @@ public class AlumnoData {
     
     public void modificarAlumno(Alumno a){
         
-        String sql="UPDATE `alumno` SET `idAlumno`= ? ,`dni`= ? ,`apellido`= ? ,`nombre`= ? ,`fechaNacimiento`= ? ,`estado`= ? ";
+        String sql="UPDATE alumno SET dni = ? ,apellido = ? ,nombre = ? ,fechaNacimiento = ? ,estado = ? WHERE idAlumno = ? " ;
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             
-            ps.setInt(1, a.getIdAlumno());
-            ps.setInt(2,a.getDni());
-            ps.setString(3, a.getApellido());
-            ps.setString(4, a.getNombre());
-            ps.setDate(5, Date.valueOf(a.getFechaNacimiento()));
-           // ps.setBoolean(6, a.getActivo()); no iria ya que modificarias el estado
+         
+            ps.setInt(1,a.getDni());
+            ps.setString(2, a.getApellido());
+            ps.setString(3, a.getNombre());
+            ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));
+           ps.setBoolean(5, a.getActivo());    
+ps.setInt(6, a.getIdAlumno());
             
            int good=ps.executeUpdate();
            
