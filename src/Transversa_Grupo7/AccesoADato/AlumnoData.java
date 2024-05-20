@@ -1,39 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package universidadejemplo.AccesoADato;
 
-import universidadejemplo.Entidades.Alumno;
- import java.sql.Connection;
- import java.sql.Date;
- import java.sql.PreparedStatement;
- import java.sql.ResultSet;
- import java.sql.SQLException;
- import java.sql.Statement;
+package Transversa_Grupo7.AccesoADato;
+
+
+import Trasnversal_Grupo7.Entidades.Alumno;
+ import java.sql.*;
  import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
  import javax.swing.JOptionPane; 
-//import java.sql.PreparedStatement;
 
 
-/**
- *
- * @author Usuario
- */
+
+
 public class AlumnoData {
     
     private Connection con;
 
-    public AlumnoData(Alumno a) {
+    public AlumnoData() {
     }
+
     
     public void guardarAlumno(Alumno a){ // viene sin id
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
      try {
-     PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+     PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
      ps.setInt(1, a.getDni());
      ps.setString(2, a.getApellido());
      ps.setString(3, a.getNombre());
@@ -48,7 +38,8 @@ public class AlumnoData {
      ps.close();
 
      } catch (SQLException ex) {
-     JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno"+ex.getMessage()); 
+     JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno");
+         System.out.println(ex.getMessage());
     }
 
      }
@@ -141,10 +132,44 @@ public class AlumnoData {
     }
     
     public void eliminarAlumno(int id){
+        String sql="DELETE FROM `alumno` WHERE idAlumno = ?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int verificar=ps.executeUpdate();
+            if(verificar>0){
+                System.out.println("Alumno con el id. "+id+" eliminado" );
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar alumno");
+        }
+        
     
     }
     
     public ArrayList <Alumno> listarAlumno(){
+         ArrayList<Alumno> alumnos=new ArrayList();
+         String sql="SELECT * FROM `alumno` WHERE estado > 0";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+            Alumno alumno=new Alumno();
+            alumno.setIdAlumno(rs.getInt("idAlumno"));
+            alumno.setDni(rs.getInt("dni"));
+            alumno.setApellido(rs.getString("apellido"));
+            alumno.setNombre(rs.getString("nombre"));
+            alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+            alumno.setActivo(true);
+            alumnos.add(alumno);
+            
+            }
+            ps.close();
+        } catch (SQLException ex) {
+       JOptionPane.showMessageDialog(null, "error al listar alumnos");
+        }
+         
+        return alumnos;
     
     }
 }

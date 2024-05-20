@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package universidadejemplo.Entidades;
+package Trasnversal_Grupo7.Entidades;
 
 import java.time.LocalDate;
 
@@ -31,12 +31,15 @@ public class Alumno {
         this.dni=dni;
     }
 
-    public Alumno(String apellido, LocalDate fechaNacimiento, Boolean activo, int dni) {
+    public Alumno(String apellido, String nombre, LocalDate fechaNacimiento, Boolean activo, int dni) {
         this.apellido = apellido;
+        this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
-        this.dni=dni;
+        this.dni = dni;
     }
+
+  
 
     public int getIdAlumno() {
         return idAlumno;
