@@ -5,10 +5,78 @@
  */
 package Transversa_Grupo7.AccesoADato;
 
+import Trasnversal_Grupo7.Entidades.Materia;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class MateriaData {
+    private Connection con= Conexion.getConexion();
+
+    public MateriaData() {
+    }
     
+    public void agregarMateria(Materia m){
+        
+        String sql="INSERT INTO materia(nombre, año, estado) VALUES ( ? , ? , ? )";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql,  Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setString(1, m.getNombre());
+            ps.setInt(2, m.getAnioMateria());
+            ps.setBoolean(3, true);
+            
+            ps.executeUpdate();
+            
+            ResultSet rs= ps.getGeneratedKeys();
+            
+            if(rs.next()){
+                m.setIdMateria(rs.getInt("idMateria"));
+                
+                JOptionPane.showMessageDialog(null,"Materia Agregada Exitosamente");
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+         System.out.println(ex.getMessage());
+        }
+        
+            
+    }
+    
+    public Materia buscarMateria(int id){
+        Materia m=new Materia();
+        
+        String sql="SELECT idMateria, nombre, año, estado FROM `materia` WHERE idMateria = ? AND estado > 0 ";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            
+            ResultSet rs= ps.executeQuery();
+            
+            if(rs.next()){
+                m.setIdMateria(id);
+                m.setNombre(rs.getString("nombre"));
+                m.setActivo(true);
+                m.setAnioMateria(rs.getInt("año"));
+                
+                
+                
+            
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar  Materia por ID");
+        }
+        
+        return m;
+    }
 }

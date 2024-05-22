@@ -4,6 +4,7 @@ package Transversa_Grupo7.AccesoADato;
 
 import Trasnversal_Grupo7.Entidades.Alumno;
  import java.sql.*;
+import java.time.LocalDate;
  import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,11 +15,35 @@ import java.util.logging.Logger;
 
 public class AlumnoData {
     
+
     private Connection con=Conexion.getConexion();
 
-    public AlumnoData() {
-    }
+     
 
+    
+//    public void guardarAlumno(Alumno a){ // viene sin id
+//        String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
+//     try {
+//        PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//        ps.setInt(1, a.getDni());
+//        ps.setString(2, a.getApellido());
+//        ps.setString(3, a.getNombre());
+//        ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));//localDate a Date
+//        ps.setBoolean(5, a.getActivo()); // if reducido
+//        ps.executeUpdate();
+//        ResultSet rs = ps.getGeneratedKeys();
+//        if (rs.next()) {
+//        a.setIdAlumno(rs.getInt("idAlumno"));
+//        JOptionPane.showMessageDialog(null, "Alumno añadido con exito."); 
+//        }
+//        ps.close();
+//
+//     } catch (SQLException ex) {
+//     JOptionPane.showMessageDialog(null, "ErroRRRRRR");
+//         System.out.println(ex.getMessage());
+//      }
+//
+//     }
     
     public void guardarAlumno(Alumno a){ // viene sin id
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
@@ -33,7 +58,7 @@ public class AlumnoData {
      ResultSet rs = ps.getGeneratedKeys();
      if (rs.next()) {
      a.setIdAlumno(rs.getInt("idAlumno"));
-     JOptionPane.showMessageDialog(null, "Alumno añadido con exito."); 
+     JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
     }
      ps.close();
 
@@ -43,6 +68,7 @@ public class AlumnoData {
     }
 
      }
+    
     
     public Alumno buscarAlumno(int id){
         Alumno alumno=new Alumno();
@@ -124,7 +150,8 @@ ps.setInt(6, a.getIdAlumno());
                JOptionPane.showMessageDialog(null, "El alumno no existe");
            }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+            System.out.println("Estoy aqui");
+           // JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
 
         }
         
