@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Transversa_Grupo7.AccesoADato;
 
+package Transversa_Grupo7.AccesoADato;
 import Trasnversal_Grupo7.Entidades.Materia;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Usuario
- */
+
 public class MateriaData {
     private Connection con= Conexion.getConexion();
 
@@ -68,13 +60,10 @@ public class MateriaData {
                 m.setNombre(rs.getString("nombre"));
                 m.setActivo(true);
                 m.setAnioMateria(rs.getInt("año"));
-                
-                
-                
-            
+           
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al buscar  Materia por ID");
+            JOptionPane.showMessageDialog(null, "Error al buscar materia por ID");
         }
         
         return m;

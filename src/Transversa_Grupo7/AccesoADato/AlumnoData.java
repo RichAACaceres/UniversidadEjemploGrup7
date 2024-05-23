@@ -19,31 +19,6 @@ public class AlumnoData {
     private Connection con=Conexion.getConexion();
 
      
-
-    
-//    public void guardarAlumno(Alumno a){ // viene sin id
-//        String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
-//     try {
-//        PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//        ps.setInt(1, a.getDni());
-//        ps.setString(2, a.getApellido());
-//        ps.setString(3, a.getNombre());
-//        ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));//localDate a Date
-//        ps.setBoolean(5, a.getActivo()); // if reducido
-//        ps.executeUpdate();
-//        ResultSet rs = ps.getGeneratedKeys();
-//        if (rs.next()) {
-//        a.setIdAlumno(rs.getInt("idAlumno"));
-//        JOptionPane.showMessageDialog(null, "Alumno añadido con exito."); 
-//        }
-//        ps.close();
-//
-//     } catch (SQLException ex) {
-//     JOptionPane.showMessageDialog(null, "ErroRRRRRR");
-//         System.out.println(ex.getMessage());
-//      }
-//
-//     }
     
     public void guardarAlumno(Alumno a){ // viene sin id
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
