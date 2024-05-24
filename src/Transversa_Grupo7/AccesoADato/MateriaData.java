@@ -2,6 +2,7 @@
 package Transversa_Grupo7.AccesoADato;
 import Trasnversal_Grupo7.Entidades.Materia;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -120,10 +121,30 @@ public class MateriaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
         }
+ 
+    }
+    public ArrayList<Materia> listarMateria(){
+        ArrayList<Materia> lista=new ArrayList();
+        String sql="SELECT * FROM materia WHERE estado > 0";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+           ResultSet rs= ps.executeQuery();
+           while(rs.next()){
+               Materia materia=new Materia();
+               
+               materia.setNombre(rs.getString("nombre"));
+               materia.setAnioMateria(rs.getInt("año"));
+               materia.setIdMateria(rs.getInt("idMateria"));
+               materia.setActivo(true);
+               lista.add(materia);
+               
+           }
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al listar alumnos");
+        }
         
-       
-        
-        
+        return lista;
+    
     
     }
 

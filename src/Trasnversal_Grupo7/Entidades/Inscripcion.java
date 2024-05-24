@@ -18,14 +18,14 @@ public class Inscripcion {
     public Inscripcion() {
     }
 
-    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
-        this.idInscripcion = idInscripcion;
+    public Inscripcion(Alumno alumno, Materia materia, double nota) {
         this.alumno = alumno;
         this.materia = materia;
         this.nota = nota;
     }
 
-    public Inscripcion(Alumno alumno, Materia materia, double nota) {
+    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
+        this.idInscripcion = idInscripcion;
         this.alumno = alumno;
         this.materia = materia;
         this.nota = nota;
@@ -65,8 +65,10 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", alumno=" + alumno.getApellido()+" "+alumno.getNombre() + ", materia=" + materia + ", nota=" + nota + '}';
+        return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota + '}';
     }
+
+ 
 
     
     
