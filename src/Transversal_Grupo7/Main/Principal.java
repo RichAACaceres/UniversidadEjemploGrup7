@@ -63,12 +63,40 @@ public class Principal {
          //Listar materias
          //System.out.println(data.listarMateria());
          
-//        InscripcionData ins=new InscripcionData();
+       InscripcionData ins=new InscripcionData();
 //        
 //        Alumno alumno=alu.buscarAlumno(12);
 //        Materia materia=mate.buscarMateria(8);
 //        Inscripcion insc=new Inscripcion(alumno,materia,7);
 //        ins.guardarInscripcion(insc);
          
-    }
+         //Obtener todas las inscripciones
+//System.out.println(ins.obtenerInscripciones())
+
+//Obtener inscripciones por alumno
+//System.out.println(ins.obtenerInscripcionesPorAlumno(12));
+        
+//Listar materias en las que está inscripto un alumno
+//for(Materia is : ins.obtenerMateriasCursadas(12)){
+//    System.out.println("Nombre: "+is.getNombre());
+//    System.out.println("idMateria: "+is.getIdMateria());
+//}
+
+//listar materias en las que NO está inscripto un alumno
+//for(Materia is : ins.obtenerMateriasNoCursadas(12)){
+//    System.out.println("Nombre: "+is.getNombre());
+//    System.out.println("idMateria: "+is.getIdMateria());
+//}
+
+// Borrar inscripcion
+//ins.borrarInscripcion(12, 9);
+
+//Actualizar nota
+//ins.actualizarNota(12, 8, 10);
+
+//Obtener alumnos por materia
+for(Alumno a :ins.obtenerAlumnosPorMateria(8)){
+    System.out.println(a.getApellido()+" está inscripto en esta materia");
+}
+     }
 }
