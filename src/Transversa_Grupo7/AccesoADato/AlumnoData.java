@@ -133,14 +133,15 @@ ps.setInt(6, a.getIdAlumno());
     }
     
     public void eliminarAlumno(int id){
-        String sql="DELETE FROM `alumno` WHERE idAlumno = ?";
+        String sql="UPDATE `alumno` SET estado = 0 WHERE idAlumno = ?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
             int verificar=ps.executeUpdate();
-            if(verificar>0){
+            if(verificar > 0){
                 System.out.println("Alumno con el id. "+id+" eliminado" );
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar alumno");
         }

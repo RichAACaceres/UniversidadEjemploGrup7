@@ -40,7 +40,7 @@ public class Principal {
        //alu.modificarAlumno(carlos);
 //        
 //        Eliminar alumno por id
-      //alu.eliminarAlumno(9);
+      //alu.eliminarAlumno(12);
 //        
 //        Listar alumnos
 
@@ -95,8 +95,8 @@ public class Principal {
 //ins.actualizarNota(12, 8, 10);
 
 //Obtener alumnos por materia
-for(Alumno a :ins.obtenerAlumnosPorMateria(8)){
-    System.out.println(a.getApellido()+" está inscripto en esta materia");
-}
-     }
+///for(Alumno a :ins.obtenerAlumnosPorMateria(8)){
+//    System.out.println(a.getApellido()+" está inscripto en esta materia");
+//}
+    }
 }
