@@ -74,7 +74,9 @@ public class Principal {
 //System.out.println(ins.obtenerInscripciones())
 
 //Obtener inscripciones por alumno
-//System.out.println(ins.obtenerInscripcionesPorAlumno(12));
+for(Inscripcion i:ins.obtenerInscripcionesPorAlumno(12)){
+    System.out.println(i.getAlumno()+" "+i.getMateria());
+}
         
 //Listar materias en las que está inscripto un alumno
 //for(Materia is : ins.obtenerMateriasCursadas(12)){

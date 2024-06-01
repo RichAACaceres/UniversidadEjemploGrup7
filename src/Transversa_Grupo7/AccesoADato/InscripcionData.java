@@ -63,16 +63,21 @@ private AlumnoData ad=new AlumnoData();
     }
     public ArrayList<Inscripcion>obtenerInscripcionesPorAlumno(int id){
     ArrayList<Inscripcion>inscripciones=new ArrayList();
-    Inscripcion ins=new Inscripcion();
+   
+    
+  
     String sql="SELECT * FROM inscripcion WHERE idAlumno = ? ";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
            ResultSet rs=ps.executeQuery();
            while(rs.next()){
+                Inscripcion ins=new Inscripcion();
+               Alumno alu=new Alumno();
+               Materia mat=new Materia();
            ins.setIdInscripcion(rs.getInt("idInscripcion"));
-           Alumno alu=ad.buscarAlumnoPorDni(rs.getInt("idAlumno"));
-           Materia mat=md.buscarMateria(rs.getInt("idMateria"));
+           alu=ad.buscarAlumno(id);
+            mat=md.buscarMateria(rs.getInt("idMateria"));
            ins.setAlumno(alu);
            ins.setMateria(mat);
            ins.setNota(rs.getInt("nota"));
@@ -174,7 +179,7 @@ private AlumnoData ad=new AlumnoData();
     public ArrayList<Alumno> obtenerAlumnosPorMateria(int idMateria){
     ArrayList<Alumno>alumnos=new ArrayList();
     
-    String sql="SELECT alumno.idAlumno , dni , fechaNacimiento , apellido , estado "
+    String sql="SELECT alumno.idAlumno , dni ,nombre, fechaNacimiento , apellido , estado "
             + "FROM inscripcion, alumno "
             + "WHERE inscripcion.idAlumno = alumno.idAlumno AND inscripcion.idMateria = ? AND alumno.estado > 0";
         try {

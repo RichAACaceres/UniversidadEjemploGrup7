@@ -23,7 +23,7 @@ public class MateriaData {
             
             ps.setString(1, m.getNombre());
             ps.setInt(2, m.getAnioMateria());
-            ps.setBoolean(3, true);
+            ps.setBoolean(3, m.getActivo());
             
             ps.executeUpdate();
             
@@ -91,8 +91,8 @@ public class MateriaData {
             
             
         } catch (SQLException ex) {
-            System.out.println("Estoy aqui");
-           // JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+           
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
 
         }
         
@@ -112,7 +112,7 @@ public class MateriaData {
             int fila = ps.executeUpdate();
             
             if(fila==1){
-               JOptionPane.showMessageDialog(null, " Se eliminó el alumno.");
+               JOptionPane.showMessageDialog(null, " Se eliminó la materia.");
  
             }
             ps.close();

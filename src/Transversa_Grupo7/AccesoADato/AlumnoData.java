@@ -48,7 +48,7 @@ public class AlumnoData {
     public Alumno buscarAlumno(int id){
         Alumno alumno=new Alumno();
         
-        String sqlAlum="SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE idAlumno = ? AND estado = 1";
+        String sqlAlum="SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE idAlumno = ? AND estado > 0";
         
         try {
             PreparedStatement ps=con.prepareStatement(sqlAlum);
@@ -77,7 +77,7 @@ public class AlumnoData {
     public Alumno buscarAlumnoPorDni(int dni){
         Alumno alumno=new Alumno();
         
-        String sql="SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE dni = ? AND estado = 1";
+        String sql="SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE dni = ? AND estado > 0";
                 
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -95,6 +95,7 @@ public class AlumnoData {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al buscar alumno por DNI");
+            System.out.println(ex.getMessage());
         }
         
         return alumno;
@@ -125,8 +126,9 @@ ps.setInt(6, a.getIdAlumno());
                JOptionPane.showMessageDialog(null, "El alumno no existe");
            }
         } catch (SQLException ex) {
-            System.out.println("Estoy aqui");
-           // JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+          JOptionPane.showMessageDialog(null, "Error al modificar alumno");
+            System.out.println(ex.getMessage());  
+          
 
         }
         
